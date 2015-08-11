@@ -73,13 +73,22 @@ module.exports = function(grunt) {
       js: {
         files: ['js/dev/*.js', '!js/dev/vendor/*.*'],
         tasks: ['jshint', 'uglify'],
-      },
+      }
+    },
+    concurrent: {
+        dev: {
+            tasks: ['connect', 'watch'],
+            options: {
+                logConcurrentOutput: true
+            }
+        }
     }
+
 
 /* TODO
     ~~1. Configure watch for CSS and JS~~
     2. Configure livereload in watch environment
-    3. Configure scss-lint to conform to my coding style (i.e. 4 spaces instead of 2) & enable in watch
+    3. Configure scss-lint to conform to coding style (i.e. 4 spaces instead of 2) & enable in watch
     4. Configure jshint
     5. Break out gruntfile into multiple different components for ease
 */
@@ -94,9 +103,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-scss-lint');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-concurrent');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint', 'uglify', 'scsslint', 'sass', 'autoprefixer', 'imagemin']);
-  grunt.registerTask('dev', ['connect']);
+  grunt.registerTask('dev', ['concurrent:dev']);
 
 };
