@@ -69,10 +69,16 @@ module.exports = function(grunt) {
       css: {
         files: ['css/dev/**/*.scss'],
         tasks: [/*'scsslint',*/ 'sass', 'autoprefixer'],
+        options: {
+            livereload: true,
+        },
       },
       js: {
         files: ['js/dev/*.js', '!js/dev/vendor/*.*'],
         tasks: ['jshint', 'uglify'],
+        options: {
+            livereload: true,
+        },
       }
     },
     concurrent: {
@@ -87,7 +93,7 @@ module.exports = function(grunt) {
 
 /* TODO
     ~~1. Configure watch for CSS and JS~~
-    2. Configure livereload in watch environment
+    ~~2. Configure livereload in watch environment~~
     3. Configure scss-lint to conform to coding style (i.e. 4 spaces instead of 2) & enable in watch
     4. Configure jshint
     5. Break out gruntfile into multiple different components for ease
